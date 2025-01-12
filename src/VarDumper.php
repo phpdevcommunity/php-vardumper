@@ -2,7 +2,8 @@
 
 namespace PhpDevCommunity\Debug;
 
-use PhpDevCommunity\Debug\Output\CliOutput;
+use PhpDevCommunity\Debug\Output\CliPrintOutput;
+use PhpDevCommunity\Debug\Output\CliVarDumpOutput;
 use PhpDevCommunity\Debug\Output\HtmlOutput;
 use PhpDevCommunity\Debug\Output\OutputInterface;
 use ReflectionClass;
@@ -15,7 +16,7 @@ final class VarDumper
     public function __construct(OutputInterface $output = null)
     {
         if ($output === null) {
-            $output = \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? new CliOutput() : new HtmlOutput();
+            $output = \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? new CliVarDumpOutput() : new HtmlOutput();
         }
         $this->output = $output;
     }
@@ -23,8 +24,7 @@ final class VarDumper
     public function dump(...$vars): void
     {
         foreach ($vars as $item) {
-            echo $this->output->print($item);
+           $this->output->print($item);
         }
     }
-
 }

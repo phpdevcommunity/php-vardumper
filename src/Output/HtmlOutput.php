@@ -8,26 +8,45 @@ use ReflectionProperty;
 final class HtmlOutput implements OutputInterface
 {
 
-    private int $maxDepth;
+    private array $styles = [];
 
-    public function __construct(int $maxDepth = 5)
+    private int $maxDepth;
+    /**
+     * @var callable|null
+     */
+    private $output;
+
+    public function __construct(int $maxDepth = 5, callable $output = null)
     {
         $this->maxDepth = $maxDepth;
+        if ($output === null) {
+            $output = function (string $dumped) {
+                echo $dumped;
+            };
+        }
+        $this->output = $output;
     }
 
     public function print($value): void
     {
-        $html[] = '<style>';
-        $html[] = file_get_contents(dirname(__DIR__, 2) . '/resources/css/dump.css');
-        $html[] = '</style>';
-        $html[] = '<div class="beautify-print">';
+        if ($this->styles === []) {
+            $this->styles[] = '<style>';
+            $css  = file_get_contents(dirname(__DIR__, 2) . '/resources/css/dump.css');
+            $this->styles[] = $css;
+            $this->styles[] = '</style>';
+            $html = $this->styles;
+        }
+        $html[] = '<div class="__beautify-var-dumper">';
         $result = $this->inspectItem($value);
         $it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($result));
         foreach ($it as $v) {
             $html[] = $v;
         }
         $html[] = '</div>';
-        echo implode(PHP_EOL, $html);
+        $dumped = implode(PHP_EOL, $html);
+
+        $output = $this->output;
+        $output($dumped);
     }
 
     private function inspectItem($item, int $indent = 0): array
@@ -85,7 +104,7 @@ final class HtmlOutput implements OutputInterface
             }
             $parentClass = $parentClass->getParentClass();
         }
-        foreach ($reflection->getTraits(ReflectionProperty::IS_PRIVATE | ReflectionProperty::IS_PROTECTED) as $trait) {
+        foreach ($reflection->getTraits() as $trait) {
             foreach ($trait->getProperties() as $property) {
                 $property = $reflection->getProperty($property->getName());
                 $property->setAccessible(true);

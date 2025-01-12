@@ -2,7 +2,7 @@
 
 namespace Test\PhpDevCommunity\Debug;
 
-use PhpDevCommunity\Debug\Output\CliOutput;
+use PhpDevCommunity\Debug\Output\CliPrintOutput;
 use PhpDevCommunity\Debug\Output\HtmlOutput;
 use PhpDevCommunity\Debug\VarDumper;
 use PhpDevCommunity\UniTester\TestCase;
@@ -22,8 +22,10 @@ class VarDumperTest extends TestCase
 
     protected function execute(): void
     {
-       $dumper = new VarDumper(new HtmlOutput());
-        $dumper->dump($_ENV);
-       exit();
+        $output = new CliPrintOutput(function ($dumped) {
+            $this->assertEquals("foo", $dumped);
+        });
+        $varDumper = new VarDumper($output);
+        $varDumper->dump('foo');
     }
 }

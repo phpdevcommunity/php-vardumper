@@ -1,4 +1,4 @@
-.beautify-print {
+.__beautify-var-dumper {
     box-sizing: border-box;
     background-color: #24292e;
     color: #f8f8f2;
@@ -10,22 +10,22 @@
     overflow: auto;
     width: 100%;
 }
-.beautify-print .key {
+.__beautify-var-dumper .key {
     color: #e89d69;
 }
-.beautify-print .string {
+.__beautify-var-dumper .string {
     color: #79b8ff;
 }
-.beautify-print .number {
+.__beautify-var-dumper .number {
     color: #ae81ff;
 }
-.beautify-print .boolean {
+.__beautify-var-dumper .boolean {
     color: #f92672;
 }
-.beautify-print .null {
+.__beautify-var-dumper .null {
     color: #f92672;
 }
-.beautify-print .type {
+.__beautify-var-dumper .type {
     color: #e1f7fc;
     font-style: italic;
     font-size: 12px;
