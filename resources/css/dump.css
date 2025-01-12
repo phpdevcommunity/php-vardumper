@@ -1,0 +1,32 @@
+.beautify-print {
+    box-sizing: border-box;
+    background-color: #24292e;
+    color: #f8f8f2;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow: auto;
+    width: 100%;
+}
+.beautify-print .key {
+    color: #e89d69;
+}
+.beautify-print .string {
+    color: #79b8ff;
+}
+.beautify-print .number {
+    color: #ae81ff;
+}
+.beautify-print .boolean {
+    color: #f92672;
+}
+.beautify-print .null {
+    color: #f92672;
+}
+.beautify-print .type {
+    color: #e1f7fc;
+    font-style: italic;
+    font-size: 12px;
+}

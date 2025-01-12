@@ -1,0 +1,24 @@
+{
+  "name": "phpdevcommunity/php-vardumper",
+  "description": "A lightweight PHP VarDumper library",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "F. Michel",
+      "homepage": "https://www.phpdevcommunity.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PhpDevCommunity\\Debug\\": "src",
+      "Test\\PhpDevCommunity\\Debug\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpdevcommunity/unitester": "^0.1.0@alpha"
+  }
+}
