@@ -1,4 +1,4 @@
-.__beautify-var-dumper {
+#uniqId.__beautify-var-dumper {
     box-sizing: border-box;
     background-color: #24292e;
     color: #f8f8f2;
@@ -10,23 +10,58 @@
     overflow: auto;
     width: 100%;
 }
-.__beautify-var-dumper .key {
+#uniqId.__beautify-var-dumper .key {
     color: #e89d69;
 }
-.__beautify-var-dumper .string {
+#uniqId.__beautify-var-dumper .string {
     color: #79b8ff;
 }
-.__beautify-var-dumper .number {
+#uniqId.__beautify-var-dumper .number {
     color: #ae81ff;
 }
-.__beautify-var-dumper .boolean {
+#uniqId.__beautify-var-dumper .boolean {
     color: #f92672;
 }
-.__beautify-var-dumper .null {
+#uniqId.__beautify-var-dumper .null {
     color: #f92672;
 }
-.__beautify-var-dumper .type {
+#uniqId.__beautify-var-dumper .type {
     color: #e1f7fc;
     font-style: italic;
     font-size: 12px;
+}
+
+#uniqId.__beautify-var-dumper .caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+    font-style: normal !important;
+}
+
+
+/* Create the caret/arrow with a unicode, and style it */
+#uniqId.__beautify-var-dumper .caret::before {
+    content: "\25B6";
+    color: #7ce3fa;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+#uniqId.__beautify-var-dumper .caret-down::before {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari */'
+    transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+#uniqId.__beautify-var-dumper .nested {
+    display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+#uniqId.__beautify-var-dumper .active {
+    display: block;
 }

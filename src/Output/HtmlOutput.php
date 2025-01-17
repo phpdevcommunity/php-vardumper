@@ -8,8 +8,6 @@ use ReflectionProperty;
 final class HtmlOutput implements OutputInterface
 {
 
-    private array $styles = [];
-
     private int $maxDepth;
     /**
      * @var callable|null
@@ -29,21 +27,27 @@ final class HtmlOutput implements OutputInterface
 
     public function print($value): void
     {
-        if ($this->styles === []) {
-            $this->styles[] = '<style>';
-            $css  = file_get_contents(dirname(__DIR__, 2) . '/resources/css/dump.css');
-            $this->styles[] = $css;
-            $this->styles[] = '</style>';
-            $html = $this->styles;
-        }
-        $html[] = '<div class="__beautify-var-dumper">';
+        $id ='var_dump_'.md5(uniqid());
+
+        $html[] = '<style>';
+        $css  = file_get_contents(dirname(__DIR__, 2) . '/resources/css/dump.css');
+        $html[] = str_replace('#uniqId', "#$id", $css);
+        $html[] = '</style>';
+
+        $html[] = '<script>';
+        $js = file_get_contents(dirname(__DIR__, 2) . '/resources/js/debug.js');
+        $js = str_replace('#uniqId', "#$id", $js);
+        $html[] = $js;
+        $html[] = '</script>';
+
+        $html[] = sprintf('<div id="%s" class="__beautify-var-dumper">', $id);
         $result = $this->inspectItem($value);
         $it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($result));
         foreach ($it as $v) {
             $html[] = $v;
         }
         $html[] = '</div>';
-        $dumped = implode(PHP_EOL, $html);
+        $dumped = implode('', $html);
 
         $output = $this->output;
         $output($dumped);
@@ -59,12 +63,22 @@ final class HtmlOutput implements OutputInterface
         }
 
         if (is_array($item)) {
-            $html[] = "<span class='type'>array</span> <small><i>(Size: " . count($item) . ")</i></small> (<br>";
+            $id = 'target_'.md5(uniqid());
+            $caretValue =  "data-target='#{$id}'>array</span> <small><i>(Size: " . count($item) . ")</i></small> (<br>";
+            if ($indent <= 1) {
+                $html[] = "<span class='type caret caret-down' $caretValue";
+                $html[] = "<div class='nested active' id='{$id}'>";
+            }else {
+                $html[] = "<span class='type caret' $caretValue";
+                $html[] = "<div class='nested' id='{$id}'>";
+            }
             foreach ($item as $key => $value) {
                 $html[] = "{$indentStr}<span class='key'>$key</span> => ";
                 $html[] = $this->inspectItem($value, $indent + 1);
             }
             $html[] = "{$indentStr})";
+            $html[] = "</div>";
+            return $html;
         } elseif (is_object($item)) {
             $html[] =  "<span class='type'>object</span> (" . get_class($item) . ") {<br>";
             $properties = $this->inspectObject($item);
@@ -89,7 +103,6 @@ final class HtmlOutput implements OutputInterface
 
         $html[] = "<br>";
         return $html;
-
     }
 
     private function inspectObject(object $object): array
@@ -111,6 +124,11 @@ final class HtmlOutput implements OutputInterface
                 $properties[$property->getName()] = $property->getValue($object);
             }
         }
+
+        foreach (get_object_vars($object) as $name => $value) {
+            $properties[$name] = $value;
+        }
+
         foreach ($reflection->getProperties() as $property) {
             $property->setAccessible(true);
             $properties[$property->getName()] = $property->getValue($object);
@@ -118,6 +136,14 @@ final class HtmlOutput implements OutputInterface
         $result = [];
         foreach ($properties as $key => $value) {
             $result[$key] = $value;
+        }
+
+        if ($reflection->hasMethod('__debugInfo')) {
+            $method = $reflection->getMethod('__debugInfo');
+            $infos = $method->invoke($object);
+            foreach ($infos as $key => $value) {
+                $result[$key] = $value;
+            }
         }
 
         return $result;

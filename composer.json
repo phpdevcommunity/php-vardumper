@@ -1,6 +1,6 @@
 {
   "name": "phpdevcommunity/php-vardumper",
-  "description": "A lightweight PHP VarDumper library",
+  "description": "A lightweight and versatile PHP library for debugging and inspecting variables with customizable output formats.",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -13,10 +13,14 @@
     "psr-4": {
       "PhpDevCommunity\\Debug\\": "src",
       "Test\\PhpDevCommunity\\Debug\\": "tests"
-    }
+    },
+    "files": [
+      "functions/helpers.php"
+    ]
   },
   "require": {
-    "php": ">=7.4"
+    "php": ">=7.4",
+    "ext-json": "*"
   },
   "require-dev": {
     "phpdevcommunity/unitester": "^0.1.0@alpha"

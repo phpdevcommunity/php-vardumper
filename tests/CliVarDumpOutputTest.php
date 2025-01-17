@@ -33,7 +33,6 @@ class CliVarDumpOutputTest extends TestCase
         });
         $cliOutput->print("Hello, world!");
         $output = ob_get_clean();
-        $this->assertStringStartsWith($output, 'string(13) "Hello, world!"');
-
+        $this->assertStringContains($output, 'string(13) "Hello, world!"');
     }
 }

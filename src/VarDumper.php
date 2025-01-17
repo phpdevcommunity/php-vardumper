@@ -16,7 +16,7 @@ final class VarDumper
     public function __construct(OutputInterface $output = null)
     {
         if ($output === null) {
-            $output = \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? new CliVarDumpOutput() : new HtmlOutput();
+            $output = \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? new CliPrintOutput() : new HtmlOutput();
         }
         $this->output = $output;
     }
