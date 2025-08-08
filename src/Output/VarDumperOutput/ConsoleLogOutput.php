@@ -1,6 +1,8 @@
 <?php
 
-namespace PhpDevCommunity\Debug\Output;
+namespace PhpDevCommunity\Debug\Output\VarDumperOutput;
+
+use PhpDevCommunity\Debug\Output\OutputInterface;
 
 final class ConsoleLogOutput implements OutputInterface
 {
@@ -26,7 +28,7 @@ final class ConsoleLogOutput implements OutputInterface
             return;
         }
         $html[] = '<script>';
-        $js = file_get_contents(dirname(__DIR__, 2) . '/resources/js/console.log.js');
+        $js = file_get_contents(dirname(__DIR__, 3) . '/resources/js/console.log.js');
         $html[] = str_replace('[value_to_debug]', json_encode(print_r($value, true)), $js);
         $html[] = '</script>';
 

@@ -2,7 +2,7 @@
 
 namespace Test\PhpDevCommunity\Debug;
 
-use PhpDevCommunity\Debug\Output\CliPrintOutput;
+use PhpDevCommunity\Debug\Output\VarDumperOutput\CliPrintOutput;
 use PhpDevCommunity\UniTester\TestCase;
 
 class CliPrintOutputTest extends TestCase
@@ -26,11 +26,11 @@ class CliPrintOutputTest extends TestCase
     public function testPrint()
     {
         ob_start();
-        $cliOutput = new CliPrintOutput(function ($dumped) {
+        $cliOutput = new CliPrintOutput(5, function ($dumped) {
             echo $dumped;
         });
         $cliOutput->print("Hello, world!");
         $output = ob_get_clean();
-        $this->assertEquals("Hello, world!", $output);
+        $this->assertEquals('(string) "Hello, world!"'.PHP_EOL, $output);
     }
 }

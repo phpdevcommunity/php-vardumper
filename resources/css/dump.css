@@ -9,6 +9,7 @@
     white-space: pre-wrap;
     overflow: auto;
     width: 100%;
+    margin-bottom: 5px;
 }
 #uniqId.__beautify-var-dumper .key {
     color: #e89d69;
@@ -16,7 +17,7 @@
 #uniqId.__beautify-var-dumper .string {
     color: #79b8ff;
 }
-#uniqId.__beautify-var-dumper .number {
+#uniqId.__beautify-var-dumper .float, #uniqId.__beautify-var-dumper .int {
     color: #ae81ff;
 }
 #uniqId.__beautify-var-dumper .boolean {

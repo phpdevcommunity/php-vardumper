@@ -1,0 +1,36 @@
+.__beautify-backtrace-container {
+    all : unset;
+    font-family: monospace;
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 5px;
+    border: 1px solid #44475a;
+    border-radius: 6px;
+    background-color: #1e1f29;
+}
+
+.__beautify-backtrace-title {
+    all : unset;
+    font-family: monospace;
+    display: block;
+    margin-bottom: 5px;
+    color: #29a2e0;
+    padding: 5px;
+    font-size: 12px;
+}
+.__beautify-backtrace-dumper {
+    all : unset;
+    display: block;
+    box-sizing: border-box;
+    background-color: #24292e;
+    color: #f8f8f2;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 11px;
+    white-space: pre-wrap;
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 2px;
+}

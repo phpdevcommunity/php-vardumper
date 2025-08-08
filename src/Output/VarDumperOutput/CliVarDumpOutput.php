@@ -1,6 +1,8 @@
 <?php
 
-namespace PhpDevCommunity\Debug\Output;
+namespace PhpDevCommunity\Debug\Output\VarDumperOutput;
+
+use PhpDevCommunity\Debug\Output\OutputInterface;
 
 final class CliVarDumpOutput implements OutputInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Test\PhpDevCommunity\Debug;
 
-use PhpDevCommunity\Debug\Output\HtmlOutput;
+use PhpDevCommunity\Debug\Output\VarDumperOutput\HtmlOutput;
 use PhpDevCommunity\UniTester\TestCase;
 
 class HtmlOutputTest extends TestCase

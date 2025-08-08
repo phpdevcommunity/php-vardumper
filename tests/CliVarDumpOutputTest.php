@@ -2,9 +2,7 @@
 
 namespace Test\PhpDevCommunity\Debug;
 
-use PhpDevCommunity\Debug\Output\CliPrintOutput;
-use PhpDevCommunity\Debug\Output\CliVarDumpOutput;
-use PhpDevCommunity\Debug\VarDumper;
+use PhpDevCommunity\Debug\Output\VarDumperOutput\CliVarDumpOutput;
 use PhpDevCommunity\UniTester\TestCase;
 
 class CliVarDumpOutputTest extends TestCase

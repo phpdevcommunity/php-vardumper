@@ -79,12 +79,11 @@ dump($data);
 **CLI Output Example:**
 
 ```
-Array
-(
-    [name] => John Doe
-    [age] => 30
-    [email] => john.doe@example.com
-)
+array(3) [
+  [name] => (string) "John Doe"
+  [age] => (int) 30
+  [email] => (string) "john.doe@example.com"
+]
 ```
 
 #### HTML Output

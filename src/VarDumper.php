@@ -2,12 +2,9 @@
 
 namespace PhpDevCommunity\Debug;
 
-use PhpDevCommunity\Debug\Output\CliPrintOutput;
-use PhpDevCommunity\Debug\Output\CliVarDumpOutput;
-use PhpDevCommunity\Debug\Output\HtmlOutput;
 use PhpDevCommunity\Debug\Output\OutputInterface;
-use ReflectionClass;
-use ReflectionProperty;
+use PhpDevCommunity\Debug\Output\VarDumperOutput\CliPrintOutput;
+use PhpDevCommunity\Debug\Output\VarDumperOutput\HtmlOutput;
 
 final class VarDumper
 {
